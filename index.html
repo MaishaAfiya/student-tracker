@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- সাইডবার মেনু -->
     <div class="sidebar">
         <h2>Student Tracker</h2>
         <ul>
@@ -15,18 +16,30 @@
         </ul>
     </div>
     
+    <!-- মূল কন্টেন্ট এরিয়া -->
     <div class="main-content">
         <h1>আজকের ড্যাশবোর্ড 🎯</h1>
-        <div class="card-container">
-            <div class="card">
-                <h3>আজকের ক্লাস 📚</h3>
-                <p>CSE 2100 - দুপুর ২:০০ টা</p>
-            </div>
-            <div class="card">
-                <h3>বাকি থাকা টাস্ক ⏳</h3>
-                <p>১টি অ্যাসাইনমেন্ট বাকি</p>
+        
+        <!-- টাস্ক ইনপুট ফর্ম -->
+        <div class="task-form-container">
+            <h3>নতুন অ্যাসাইনমেন্ট / টাস্ক যুক্ত করুন ➕</h3>
+            <div class="form-group">
+                <input type="text" id="taskTitle" placeholder="অ্যাসাইনমেন্ট বা টাস্কের নাম লিখুন...">
+                <input type="date" id="taskDate">
+                <button id="addTaskBtn">Add Task</button>
             </div>
         </div>
+
+        <!-- টাস্ক দেখানোর লিস্ট এরিয়া -->
+        <div class="task-list-container">
+            <h3>আপনার বাকি থাকা টাস্কসমূহ ⏳</h3>
+            <ul id="taskList">
+                <!-- এখানে জাভাস্ক্রিপ্ট দিয়ে নতুন টাস্কগুলো অটো যুক্ত হবে -->
+            </ul>
+        </div>
     </div>
+
+    <!-- লজিক ফাইলটি কানেক্ট করা -->
+    <script src="renderer.js"></script>
 </body>
 </html>
