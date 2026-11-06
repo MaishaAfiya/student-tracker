@@ -10,33 +10,66 @@
     <div class="sidebar">
         <h2>Student Tracker</h2>
         <ul>
-            <li><a href="#" class="active">🏠 ড্যাশবোর্ড</a></li>
-            <li><a href="#">📅 ক্লাস রুটিন</a></li>
-            <li><a href="#">📝 অ্যাসাইনমেন্ট ও টাস্ক</a></li>
+            <li><a href="#" id="navDashboard" class="active">🏠 ড্যাশবোর্ড</a></li>
+            <li><a href="#" id="navRoutine">📅 ক্লাস রুটিন</a></li>
         </ul>
     </div>
     
     <!-- মূল কন্টেন্ট এরিয়া -->
     <div class="main-content">
-        <h1>আজকের ড্যাশবোর্ড 🎯</h1>
         
-        <!-- টাস্ক ইনপুট ফর্ম -->
-        <div class="task-form-container">
-            <h3>নতুন অ্যাসাইনমেন্ট / টাস্ক যুক্ত করুন ➕</h3>
-            <div class="form-group">
-                <input type="text" id="taskTitle" placeholder="অ্যাসাইনমেন্ট বা টাস্কের নাম লিখুন...">
-                <input type="date" id="taskDate">
-                <button id="addTaskBtn">Add Task</button>
+        <!-- ড্যাশবোর্ড সেকশন -->
+        <div id="dashboardSection" class="section">
+            <h1>আজকের ড্যাশবোর্ড 🎯</h1>
+            
+            <!-- টাস্ক ইনপুট ফর্ম -->
+            <div class="task-form-container">
+                <h3>নতুন অ্যাসাইনমেন্ট / টাস্ক যুক্ত করুন ➕</h3>
+                <div class="form-group">
+                    <input type="text" id="taskTitle" placeholder="অ্যাসাইনমেন্ট বা টাস্কের নাম লিখুন...">
+                    <input type="date" id="taskDate">
+                    <button id="addTaskBtn">Add Task</button>
+                </div>
+            </div>
+
+            <!-- টাস্ক দেখানোর লিস্ট এরিয়া -->
+            <div class="task-list-container">
+                <h3>আপনার বাকি থাকা টাস্কসমূহ ⏳</h3>
+                <ul id="taskList"></ul>
             </div>
         </div>
 
-        <!-- টাস্ক দেখানোর লিস্ট এরিয়া -->
-        <div class="task-list-container">
-            <h3>আপনার বাকি থাকা টাস্কসমূহ ⏳</h3>
-            <ul id="taskList">
-                <!-- এখানে জাভাস্ক্রিপ্ট দিয়ে নতুন টাস্কগুলো অটো যুক্ত হবে -->
-            </ul>
+        <!-- ক্লাস রুটিন সেকশন (শনিবার বাদ দেওয়া হয়েছে) -->
+        <div id="routineSection" class="section hidden">
+            <h1>ক্লাস রুটিন ম্যানেজার 📅</h1>
+            
+            <!-- রুটিন ইনপুট ফর্ম -->
+            <div class="task-form-container">
+                <h3>নতুন ক্লাস রুটিন যুক্ত করুন ⏱️</h3>
+                <div class="form-group">
+                    <select id="classDay">
+                        <option value="রবিবার">রবিবার</option>
+                        <option value="সোমবার">সোমবার</option>
+                        <option value="মঙ্গলবার">মঙ্গলবার</option>
+                        <option value="বুধবার">বুধবার</option>
+                        <option value="বৃহস্পতিবার">বৃহস্পতিবার</option>
+                    </select>
+                    <input type="text" id="classSubject" placeholder="বিষয়ের নাম (যেমন: CSE 2100)...">
+                    <input type="time" id="classTime">
+                    <input type="text" id="classRoom" placeholder="রুম নম্বর (যেমন: Lab 3)...">
+                    <button id="addClassBtn">Add Class</button>
+                </div>
+            </div>
+
+            <!-- রুটিন তালিকা -->
+            <div class="task-list-container">
+                <h3>আপনার সাপ্তাহিক রুটিন 📋</h3>
+                <div id="routineDisplayArea">
+                    <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে রুটিন তৈরি হবে -->
+                </div>
+            </div>
         </div>
+
     </div>
 
     <!-- লজিক ফাইলটি কানেক্ট করা -->

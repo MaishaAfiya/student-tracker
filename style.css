@@ -14,26 +14,33 @@ body {
 }
 .sidebar h2 { text-align: center; margin-bottom: 30px; color: #3498db; }
 .sidebar ul { list-style: none; padding: 0; }
-.sidebar li a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px; margin: 8px 0; border-radius: 5px; font-size: 16px; }
+.sidebar li a { color: #bdc3c7; text-decoration: none; display: block; padding: 12px; margin: 8px 0; border-radius: 5px; font-size: 16px; cursor: pointer; }
 .sidebar li a:hover { background-color: #34495e; color: white; }
 .sidebar li a.active { background-color: #3498db; color: white; }
 
 .main-content { padding: 40px; flex: 1; height: 100vh; overflow-y: auto; box-sizing: border-box; }
 h1 { color: #2c3e50; margin-top: 0; }
 
+.hidden { display: none !important; }
+
 .task-form-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
 .task-form-container h3 { margin-top: 0; color: #2c3e50; }
-.form-group { display: flex; gap: 15px; }
-.form-group input[type="text"] { flex: 2; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
-.form-group input[type="date"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
+.form-group { display: flex; gap: 15px; flex-wrap: wrap; }
+.form-group input, .form-group select { flex: 1; min-width: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
 .form-group button { padding: 10px 20px; background-color: #2ecc71; color: white; border: none; border-radius: 5px; font-size: 15px; cursor: pointer; font-weight: bold; }
 .form-group button:hover { background-color: #27ae60; }
 
 .task-list-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 .task-list-container h3 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #f4f6f9; padding-bottom: 10px; }
+
 #taskList { list-style: none; padding: 0; margin: 0; }
 .task-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 5px; margin-bottom: 10px; border-left: 5px solid #3498db; }
 .task-item span { font-size: 16px; color: #2c3e50; }
 .task-item small { color: #e74c3c; font-weight: bold; font-size: 14px; margin-left: 10px; }
+
+.day-section { margin-bottom: 25px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; }
+.day-title { font-size: 18px; color: #2d3748; font-weight: bold; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-bottom: 10px; }
+.class-item { display: flex; justify-content: space-between; background: #f7fafc; padding: 10px 15px; border-radius: 5px; margin-bottom: 8px; align-items: center; }
+
 .delete-btn { background-color: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
 .delete-btn:hover { background-color: #c0392b; }
