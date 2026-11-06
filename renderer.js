@@ -1,10 +1,9 @@
-// HTML-এর বাটন এবং ইনপুট বক্সগুলোকে কানেক্ট করা
+// HTML-এর উপাদানগুলো কানেক্ট করা
 const taskTitleInput = document.getElementById('taskTitle');
 const taskDateInput = document.getElementById('taskDate');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
 
-// রুটিনের উপাদানগুলো কানেক্ট করা
 const classDaySelect = document.getElementById('classDay');
 const classSubjectInput = document.getElementById('classSubject');
 const classTimeInput = document.getElementById('classTime');
@@ -12,18 +11,22 @@ const classRoomInput = document.getElementById('classRoom');
 const addClassBtn = document.getElementById('addClassBtn');
 const routineDisplayArea = document.getElementById('routineDisplayArea');
 
-// সেকশন এবং নেভিগেশন কানেক্ট করা
 const navDashboard = document.getElementById('navDashboard');
 const navRoutine = document.getElementById('navRoutine');
 const dashboardSection = document.getElementById('dashboardSection');
 const routineSection = document.getElementById('routineSection');
 
-// মেনু পরিবর্তন (Tab Switching) লজিক
+// ড্যাশবোর্ড কাউন্টার উপাদান
+const totalTasksCount = document.getElementById('totalTasksCount');
+const todayClassesCount = document.getElementById('todayClassesCount');
+
+// ট্যাব পরিবর্তন লজিক
 navDashboard.addEventListener('click', () => {
     navDashboard.classList.add('active');
     navRoutine.classList.remove('active');
     dashboardSection.classList.remove('hidden');
     routineSection.classList.add('hidden');
+    updateDashboardCounters(); // কাউন্টার আপডেট
 });
 
 navRoutine.addEventListener('click', () => {
@@ -31,14 +34,33 @@ navRoutine.addEventListener('click', () => {
     navDashboard.classList.remove('active');
     routineSection.classList.remove('hidden');
     dashboardSection.classList.add('hidden');
-    displayRoutine(); // রুটিন রিফ্রেশ করা
+    displayRoutine();
 });
 
 // অ্যাপ চালু হওয়ার সাথে সাথে লোড করা
 document.addEventListener('DOMContentLoaded', () => {
     loadTasks();
     displayRoutine();
+    updateDashboardCounters();
 });
+
+// =================== ড্যাশবোর্ড কাউন্টার লাইভ সিঙ্ক ফাংশন ===================
+function updateDashboardCounters() {
+    // ১. বাকি থাকা টাস্ক গণনা
+    const tasks = getTasksFromLocal();
+    totalTasksCount.innerText = `${tasks.length} টি`;
+
+    // ২. আজকের দিনের নাম অনুযায়ী ক্লাস গণনা
+    const daysBangla = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+    const daysEnglish = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    
+    const todayIndex = new Date().getDay();
+    const todayNameBangla = daysBangla[todayIndex];
+
+    const routine = getRoutineFromLocal();
+    const todayClasses = routine.filter(c => c.day === todayNameBangla);
+    todayClassesCount.innerText = `${todayClasses.length} টি`;
+}
 
 // =================== টাস্ক ট্র্যাকার লজিক ===================
 addTaskBtn.addEventListener('click', () => {
@@ -49,6 +71,7 @@ addTaskBtn.addEventListener('click', () => {
     addTaskToDOM(task);
     saveTaskToLocal(task);
     taskTitleInput.value = ''; taskDateInput.value = '';
+    updateDashboardCounters(); // সংখ্যা আপডেট
 });
 
 function addTaskToDOM(task) {
@@ -79,6 +102,7 @@ window.deleteTask = function(id) {
     if (taskItem) taskItem.remove();
     let tasks = getTasksFromLocal().filter(task => task.id !== id);
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    updateDashboardCounters(); // সংখ্যা আপডেট
 };
 
 // =================== ক্লাস রুটিন লজিক ===================
@@ -97,6 +121,7 @@ addClassBtn.addEventListener('click', () => {
 
     classSubjectInput.value = ''; classTimeInput.value = ''; classRoomInput.value = '';
     displayRoutine();
+    updateDashboardCounters(); // সংখ্যা আপডেট
 });
 
 function getRoutineFromLocal() {
@@ -106,7 +131,7 @@ function getRoutineFromLocal() {
 function displayRoutine() {
     routineDisplayArea.innerHTML = '';
     const routine = getRoutineFromLocal();
-    const days = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার']; // শনিবার বাদ দেওয়া হয়েছে
+    const days = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার'];
 
     days.forEach(day => {
         const dayClasses = routine.filter(c => c.day === day);
@@ -133,4 +158,5 @@ window.deleteClass = function(id) {
     let routine = getRoutineFromLocal().filter(c => c.id !== id);
     localStorage.setItem('routine', JSON.stringify(routine));
     displayRoutine();
+    updateDashboardCounters(); // সংখ্যা আপডেট
 };
